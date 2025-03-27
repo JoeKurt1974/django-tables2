@@ -313,6 +313,7 @@ class Table(metaclass=DeclarativeColumnsMetaclass):
         self.per_page_field = per_page_field
         self.show_header = show_header
         self.show_footer = show_footer
+        self.htmx_attrs = AttributeDict(htmx_attrs if htmx_attrs is not None else self._meta.htmx_attrs)
 
         # Make a copy so that modifying this will not touch the class
         # definition. Note that this is different from forms, where the
