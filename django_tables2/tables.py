@@ -152,6 +152,7 @@ class TableOptions:
         self.template_name = getattr(options, "template_name", DJANGO_TABLES2_TEMPLATE)
         self.localize = getattr(options, "localize", ())
         self.unlocalize = getattr(options, "unlocalize", ())
+        self.htmx_attr = getattr(options, "htmx_attrs", {})
 
     def _check_types(self, options, class_name):
         """Check class Meta attributes to prevent common mistakes."""
@@ -164,7 +165,7 @@ class TableOptions:
             (tuple, list, set): ["fields", "sequence", "exclude", "localize", "unlocalize"],
             (tuple, list, set, dict): ["linkify"],
             str: ["template_name", "prefix", "order_by_field", "page_field", "per_page_field"],
-            (dict,): ["attrs", "row_attrs", "pinned_row_attrs"],
+            (dict,): ["attrs", "row_attrs", "pinned_row_attrs", 'htmx_attr'],            
             (tuple, list, str): ["order_by"],
             (type(models.Model),): ["model"],
         }
@@ -271,6 +272,7 @@ class Table(metaclass=DeclarativeColumnsMetaclass):
         show_header=None,
         show_footer=True,
         extra_columns=None,
+        htmx_attrs=None,
     ):
         super().__init__()
 
